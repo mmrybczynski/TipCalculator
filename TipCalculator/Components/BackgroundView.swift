@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BackgroundView: View {
-    @State var selectedBackground: Int
+    let selectedBackground: Int
     var body: some View {
         backgroundForSelection(selectedBackground)
             .ignoresSafeArea()
