@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var selection: Tab = .home
     
     var body: some View {
+        
+        #if os(iOS)
         TabView(selection: $selection) {
             MainView()
                 .tabItem { Label("Home", systemImage: "house.fill") }
@@ -24,6 +26,7 @@ struct ContentView: View {
                 .tabItem { Label("Settings", systemImage: "gearshape") }
                 .tag(Tab.settings)
         }
+        #endif
     }
 }
 
