@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @AppStorage("selectedOption") private var selectedOption: Int = 0
+    private let options: [Int] = [0,1,2,3]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            ForEach(options, id: \.self) { option in
+                VStack {
+                    BackgroundView(selectedBackground: option)
+                }
+                .frame(width: 50, height: 100)
+                .onTapGesture {
+                    selectedOption = option
+                    print(option)
+                }
+            }
+        }
     }
 }
 
