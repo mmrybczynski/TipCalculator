@@ -49,21 +49,21 @@ struct ContentView: View {
         case .authorized, .limited:
             print("authorized")
             self.hasContactsAccess = true
-            self.settings.contactAccess = true
-            self.settings.hasCheckedPermissions = true
+            settings.contactAccess = true
+            settings.hasCheckedPermissions = true
         case .notDetermined:
             print("not determined")
             requestContactAccess()
         case .denied, .restricted:
             print("denied restricted")
             self.hasContactsAccess = false
-            self.settings.contactAccess = false
-            self.settings.hasCheckedPermissions = true
+            settings.contactAccess = false
+            settings.hasCheckedPermissions = true
         @unknown default:
             print("default")
             self.hasContactsAccess = false
-            self.settings.contactAccess = false
-            self.settings.hasCheckedPermissions = true
+            settings.contactAccess = false
+            settings.hasCheckedPermissions = true
         }
     }
     
@@ -71,8 +71,8 @@ struct ContentView: View {
         CNContactStore().requestAccess(for: .contacts) { granted, _ in
             DispatchQueue.main.async {
                 self.hasContactsAccess = granted
-                self.settings.contactAccess = true
-                self.settings.hasCheckedPermissions = true
+                settings.contactAccess = true
+                settings.hasCheckedPermissions = true
             }
         }
     }

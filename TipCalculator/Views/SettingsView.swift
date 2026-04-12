@@ -80,6 +80,9 @@ struct SettingsView: View {
                         Text("Jest zgoda na kontakty")
                             .bold()
                     }
+                    .onTapGesture {
+                        openAppSettings()
+                    }
                 } else {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
@@ -87,6 +90,9 @@ struct SettingsView: View {
                             .font(.title3)
                         Text("Brak zgody na kontakty")
                             .bold()
+                    }
+                    .onTapGesture {
+                        openAppSettings()
                     }
                 }
             }
@@ -96,6 +102,11 @@ struct SettingsView: View {
             Spacer()
             
         }
+    }
+    
+    private func openAppSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
     }
 }
 
