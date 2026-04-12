@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
+import Contacts
 
 struct SettingsView: View {
-    @AppStorage("selectedOption") private var selectedOption: Int = 0
-    @AppStorage("selectedRegion") private var selectedRegion: String = "USA"
-    @AppStorage("selectedCurrency") private var selectedCurrency: String = "USD"
+    @ObservedObject var settings = AppSettings.shared
     
     private let options: [Int] = [0,1,2,3]
     private let regions: [String] = ["USA", "EUROPE"]
@@ -22,7 +21,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Region")
                     .font(.headline)
-                Picker("Region", selection: $selectedRegion) {
+                Picker("Region", selection: $settings.selectedRegion) {
                     ForEach(regions, id: \.self) { region in
                         Text(region).tag(region)
                     }
@@ -35,7 +34,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Currency")
                     .font(.headline)
-                Picker("Currency", selection: $selectedCurrency) {
+                Picker("Currency", selection: $settings.selectedCurrency) {
                     ForEach(currency, id: \.self) { currency in
                         Text(currency).tag(currency)
                     }
@@ -57,13 +56,13 @@ struct SettingsView: View {
                             }
                             .frame(width: 50, height: 100)
                             .onTapGesture {
-                                selectedOption = option
+                                settings.selectedOption = option
                                 print(option)
                             }
                             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .stroke(selectedOption == option ? Color.red : Color.clear, lineWidth: 4)
+                                    .stroke(settings.selectedOption == option ? Color.red : Color.clear, lineWidth: 4)
                             )
                         }
                     }
@@ -72,10 +71,31 @@ struct SettingsView: View {
             }
             .padding(.horizontal)
             
+            VStack(alignment: .leading, spacing: 8) {
+                if settings.contactAccess {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                            .font(.title3)
+                        Text("Jest zgoda na kontakty")
+                            .bold()
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.gray)
+                            .font(.title3)
+                        Text("Brak zgody na kontakty")
+                            .bold()
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 20)
+            
             Spacer()
             
         }
-        
     }
 }
 

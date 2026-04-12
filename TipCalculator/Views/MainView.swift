@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
-    @AppStorage("selectedOption") private var selectedOption:Int = 0
+    @StateObject private var settings = AppSettings.shared
     
     var body: some View {
         ZStack {
-            BackgroundView(selectedBackground: selectedOption)
+            BackgroundView(selectedBackground: settings.selectedOption)
             VStack {
-                Text("\(selectedOption)")
+                Text("\(settings.selectedOption)")
                 
             }
         }
