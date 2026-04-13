@@ -79,6 +79,10 @@ struct SettingsView: View {
                             .font(.title3)
                         Text("Jest zgoda na kontakty")
                             .bold()
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
                     }
                     .onTapGesture {
                         openAppSettings()
@@ -90,6 +94,8 @@ struct SettingsView: View {
                             .font(.title3)
                         Text("Brak zgody na kontakty")
                             .bold()
+                        Spacer()
+                        Image(systemName: "chevron.right")
                     }
                     .onTapGesture {
                         openAppSettings()
