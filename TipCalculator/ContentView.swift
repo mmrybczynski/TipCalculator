@@ -78,6 +78,16 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+#Preview("Access granted") {
+    let s = AppSettings.shared
+    s.contactAccess = true
+    s.hasCheckedPermissions = true
+    return ContentView()
+}
+
+#Preview("Access denied") {
+    let s = AppSettings.shared
+    s.contactAccess = false
+    s.hasCheckedPermissions = true
+    return ContentView()
 }
