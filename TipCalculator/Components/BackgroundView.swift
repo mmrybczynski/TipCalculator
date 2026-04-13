@@ -17,7 +17,7 @@ struct BackgroundView: View {
     private func backgroundForSelection(_ value: Int) -> some View {
         switch value {
         case 0:
-            Color.blue
+            LinearGradient(colors: [.blue, .white], startPoint: .topLeading, endPoint: .bottomTrailing)
         case 1:
             LinearGradient(colors: [.purple, .pink], startPoint: .topLeading, endPoint: .bottomTrailing)
         case 2:
